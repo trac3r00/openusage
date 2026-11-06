@@ -14,6 +14,7 @@ struct SettingsScreen: View {
     @AppStorage(PaceMilestone.closeToRunningOut.settingKey) private var closeToRunningOut = false
     @AppStorage(PaceMilestone.useItOrLoseIt.settingKey) private var useItOrLoseIt = false
     @AppStorage(LogLevelSetting.key) private var logLevel = LogLevelSetting.info
+    @AppStorage(TotalSpendSetting.enabledKey) private var totalSpend = true // PERSONAL BUILD
     @State private var launchAtLogin = LaunchAtLoginSetting()
     @State private var commandLineTool = CommandLineToolInstaller()
     @State private var notificationsDenied = false
@@ -125,6 +126,9 @@ struct SettingsScreen: View {
             picker("Reset Times", selection: $dataStore.resetDisplayMode, options: ResetDisplayMode.allCases.map { ($0, $0.label) })
             Toggle(isOn: $dataStore.showsPaceMarks) {
                 titled("Pace Marks", info: "Where usage would be at an even pace")
+            }
+            Toggle(isOn: $totalSpend) {
+                titled("Total Spend", info: "Combined spend across providers, partly estimated")
             }
         }
     }

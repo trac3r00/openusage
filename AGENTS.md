@@ -2,7 +2,7 @@
 
 OpenUsage is a SwiftPM-based macOS menu-bar app that shows the usage limits of the AI coding accounts a
 user adds within the app (Claude, Codex, Cursor, Copilot, Antigravity, Devin, Grok, Muse Code, Ollama,
-OpenCode, OpenRouter, Z.ai).
+OpenCode, OpenRouter, Anthropic API, Z.ai).
 
 This file documents the engineering conventions for the project. Read it before contributing.
 
@@ -84,6 +84,8 @@ every change to a header, to renaming, or to the Options menu, or they rot unsee
 There is no hot reload. The app is a long-lived menu-bar process, so **every code change requires a
 full rebuild and restart of the running app** to take effect. The development bundle identifier is
 `com.robinebers.openusage.dev`; it never touches the installed app's settings or Keychain items.
+Without an Apple Development certificate, run `script/setup_local_signing.sh` once so every rebuild is
+signed by the same identity and Keychain access granted with "Always Allow" survives rebuilds.
 
 ## Pull Requests
 

@@ -45,6 +45,7 @@ struct DashboardContentView: View {
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 22)
         } else {
+            TotalSpendSection() // PERSONAL BUILD: Total Spend
             switch popover.dashboardTab {
             case .priority:
                 PriorityDashboardView()

@@ -29,7 +29,11 @@ let package = Package(
             ],
             path: "Sources/OpenUsage",
             resources: [
-                .copy("Resources/ProviderIcons")
+                .copy("Resources/ProviderIcons"),
+                // PERSONAL BUILD: Total Spend pricing snapshots.
+                .copy("PersonalSpend/Resources/pricing_supplement.json"),
+                .copy("PersonalSpend/Resources/pricing_litellm_snapshot.json"),
+                .copy("PersonalSpend/Resources/pricing_models_dev_snapshot.json")
             ],
             swiftSettings: [
                 .swiftLanguageMode(.v6)

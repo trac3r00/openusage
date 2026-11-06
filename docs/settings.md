@@ -37,6 +37,9 @@ always stays under Warning: moving one onto the other pushes the other 5% along.
 - **Reset Times.** `Resets 3h 25m` or `Resets Wed 4:00 PM`.
 - **Pace Marks.** A tick on each bar and Priority ring where usage would be at an even pace through
   the window. Off by default.
+- **Total Spend.** Shows the [Total Spend](dashboard.md#total-spend) card at the top of both
+  dashboard tabs and scans local logs for it. On by default. Turn it off to hide the card and stop
+  the scans.
 
 Click a limit's amount or reset on the dashboard to flip either one.
 

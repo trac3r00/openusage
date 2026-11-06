@@ -19,6 +19,7 @@ enum ProviderKind: String, Codable, CaseIterable, Sendable {
     case ollama
     case opencodeGo = "opencode"
     case openrouter
+    case anthropicAPI = "anthropic-api"
     case zai
 
     var displayName: String {
@@ -34,6 +35,7 @@ enum ProviderKind: String, Codable, CaseIterable, Sendable {
         case .ollama: "Ollama"
         case .opencodeGo: "OpenCode"
         case .openrouter: "OpenRouter"
+        case .anthropicAPI: "Anthropic API"
         case .zai: "Z.ai"
         }
     }
@@ -59,6 +61,8 @@ enum ProviderKind: String, Codable, CaseIterable, Sendable {
         case .openrouter: [.init(label: "Status Page", url: URL(string: "https://status.openrouter.ai/")!),
                            .init(label: "Usage Dashboard", url: URL(string: "https://openrouter.ai/activity")!),
                            .init(label: "Credits", url: URL(string: "https://openrouter.ai/settings/credits")!)]
+        case .anthropicAPI: [.init(label: "Status Page", url: URL(string: "https://status.claude.com")!),
+                             .init(label: "Usage Dashboard", url: URL(string: "https://platform.claude.com/usage")!)]
         case .zai: [.init(label: "Usage Dashboard", url: URL(string: "https://z.ai/manage-apikey/coding-plan/personal/my-plan")!),
                     .init(label: "API Keys", url: URL(string: "https://z.ai/manage-apikey/apikey-list")!)]
         }
@@ -71,6 +75,7 @@ enum ProviderKind: String, Codable, CaseIterable, Sendable {
         case .ollama: [.apiKey(keyPage: URL(string: "https://ollama.com/settings/keys")!)]
         case .opencodeGo: [.apiKey(keyPage: URL(string: "https://opencode.ai/console")!)]
         case .openrouter: [.apiKey(keyPage: URL(string: "https://openrouter.ai/settings/management-keys")!)]
+        case .anthropicAPI: [.apiKey(keyPage: URL(string: "https://platform.claude.com/settings/admin-keys")!)]
         case .zai: [.apiKey(keyPage: URL(string: "https://z.ai/manage-apikey/apikey-list")!)]
         }
     }

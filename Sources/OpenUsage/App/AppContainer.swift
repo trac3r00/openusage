@@ -12,6 +12,8 @@ final class AppContainer {
     let hideFromScreenShare: HideFromScreenShareSetting
     let telemetry: TelemetryRecorder
     let hubs: CLIProxyHubSync
+    /// PERSONAL BUILD: Total Spend local-log scans (Sources/OpenUsage/PersonalSpend).
+    let localSpend = LocalSpendStore()
     @ObservationIgnored private var providers: [AccountProviderRuntime]
     @ObservationIgnored private var refreshTask: Task<Void, Never>?
 
@@ -142,6 +144,7 @@ final class AppContainer {
             while !Task.isCancelled {
                 await hubs.syncDue()
                 await dataStore.refreshAll()
+                localSpend.refresh(accountKinds: Set(accounts.accounts.map(\.kind)))
                 await quotaNotifications.evaluate(
                     layout.visibleDescriptors,
                     data: dataStore.data(for:),
@@ -176,6 +179,7 @@ final class AppContainer {
             popover.customizeProviderID = nil
         }
         dataStore.apply(providers: providers, registry: registry)
+        localSpend.refresh(accountKinds: Set(accounts.accounts.map(\.kind)))
         for runtime in providers where !previous.contains(ObjectIdentifier(runtime)) {
             Task { await dataStore.refresh(providerID: runtime.provider.id, force: true) }
         }

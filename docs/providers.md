@@ -24,6 +24,7 @@ How each provider signs in and what its card shows.
 | Ollama | API key | Session, Weekly, Monthly, Extra Usage, Today, Yesterday, Last 30 Days, Requests |
 | OpenCode | API key | Session, Weekly, Monthly |
 | OpenRouter | Management API key, or a standard API key | Balance, Today, Yesterday, This Week, This Month, Prior 30 Days, Key Limit, Budget, Free Requests |
+| Anthropic API | Admin API key | Today, Yesterday, This Week, This Month, Last 30 Days |
 | Z.ai | API key | Session, Weekly, Web Searches, Rate Limit Resets |
 
 ## What you grant
@@ -190,6 +191,24 @@ day. It has no Balance, and its Yesterday and Prior 30 Days read $0. A daily, we
 limit resets at midnight UTC, and weeks start on Monday.
 
 The right-click menu adds a **Credits** link.
+
+## Anthropic API
+
+Paste an **Admin** API key (`sk-ant-admin…`) from
+[platform.claude.com/settings/admin-keys](https://platform.claude.com/settings/admin-keys) to see
+your Claude Console organization's API usage. A standard API key is rejected. Add one account per
+admin key.
+
+- Each refresh reads the organization's Usage and Cost Analytics reports for the last 30 days, split
+  by model, product, and API key, plus the names of its API keys.
+- Today, Yesterday, This Week, This Month, and Last 30 Days show what Anthropic charged. Today,
+  Yesterday, and Last 30 Days also show tokens, split into input, cache read, cache write, and output.
+- Today and yesterday are read hour by hour, so they follow this Mac's time zone. Older days are
+  read as UTC days and count toward the local day with the same date.
+- Costs with no model, such as web search and code execution, count toward the day's spend but no
+  model's.
+- Anthropic has no API for an organization's remaining credit balance, so the card can't show it.
+  Check it in the Claude Console.
 
 ## Z.ai
 

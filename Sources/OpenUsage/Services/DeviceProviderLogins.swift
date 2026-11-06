@@ -217,7 +217,7 @@ enum ProviderLoginCatalog {
         case .devin: DevinLogin()
         case .grok: GrokLogin()
         case .muse: MuseLogin()
-        case .ollama, .opencodeGo, .openrouter, .zai: APIKeyLogin(kind: kind)
+        case .ollama, .opencodeGo, .openrouter, .anthropicAPI, .zai: APIKeyLogin(kind: kind)
         }
     }
 }

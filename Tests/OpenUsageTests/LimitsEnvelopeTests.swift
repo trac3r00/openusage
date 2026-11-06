@@ -300,6 +300,7 @@ final class LimitsEnvelopeTests: XCTestCase {
             "ollama": ["session", "weekly", "monthly", "purchasedCredits"],
             "opencode": ["session", "weekly", "monthly"],
             "openrouter": ["balance", "keyLimit"],
+            "anthropic-api": [],
             "zai": ["session", "weekly", "webSearches", "rateLimitResets"]
         ]
 

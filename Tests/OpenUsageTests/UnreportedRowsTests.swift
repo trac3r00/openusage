@@ -31,6 +31,8 @@ final class UnreportedRowsTests: XCTestCase {
             "ollama.today": "$0 · 0 tokens", "ollama.yesterday": "$0 · 0 tokens", "ollama.last30": "$0 · 0 tokens",
             "openrouter.today": "$0", "openrouter.yesterday": "$0", "openrouter.week": "$0",
             "openrouter.month": "$0", "openrouter.prior30": "$0",
+            "anthropic-api.today": "$0 · 0 tokens", "anthropic-api.yesterday": "$0 · 0 tokens",
+            "anthropic-api.week": "$0", "anthropic-api.month": "$0", "anthropic-api.last30": "$0 · 0 tokens",
         ])
     }
 

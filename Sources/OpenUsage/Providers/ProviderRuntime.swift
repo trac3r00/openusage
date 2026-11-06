@@ -24,6 +24,8 @@ struct ProviderUsage: Equatable, Sendable {
     var history: UsageHistory?
     /// Row titles this reading renames, keyed by line label.
     var lineTitles: [String: String] = [:]
+    /// PERSONAL BUILD: extra histories the Total Spend card reads, keyed by `ReportedSpendBreakdowns`.
+    var spendHistories: [String: UsageHistory] = [:]
 }
 
 extension MetricLine {

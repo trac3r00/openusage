@@ -107,7 +107,7 @@ final class AccountProviderRuntime: ProviderRuntime {
                 windowResets: unexpiredZAIResets ?? [],
                 claimWindowReset: { [self] reset, requestID in await claimZAIReset(reset, requestID: requestID) }
             )
-        case .cursor, .antigravity, .copilot, .devin, .grok, .muse, .ollama, .opencodeGo, .openrouter:
+        case .cursor, .antigravity, .copilot, .devin, .grok, .muse, .ollama, .opencodeGo, .openrouter, .anthropicAPI:
             return nil
         }
     }
@@ -116,7 +116,7 @@ final class AccountProviderRuntime: ProviderRuntime {
         switch account.kind {
         case .claude: restoreClaude(snapshot)
         case .muse: museLastKnown = snapshot.lines
-        case .codex, .cursor, .antigravity, .copilot, .devin, .grok, .ollama, .opencodeGo, .openrouter, .zai: break
+        case .codex, .cursor, .antigravity, .copilot, .devin, .grok, .ollama, .opencodeGo, .openrouter, .anthropicAPI, .zai: break
         }
     }
 
@@ -171,6 +171,7 @@ final class AccountProviderRuntime: ProviderRuntime {
             case .ollama: try await refreshOllama(credential)
             case .opencodeGo: try await refreshOpenCode(credential)
             case .openrouter: try await refreshOpenRouter(credential)
+            case .anthropicAPI: try await refreshAnthropicAPI(credential)
             case .zai: try await refreshZAI(credential)
             }
         } catch ProviderError.signInExpired {
@@ -439,6 +440,7 @@ final class AccountProviderRuntime: ProviderRuntime {
         var snapshot = ProviderSnapshot(provider: provider, plan: usage.plan, lines: usage.lines, notice: usage.notice)
         snapshot.lineTitles = usage.lineTitles.isEmpty ? nil : usage.lineTitles
         HistoryRow.append(to: &snapshot, for: widgetDescriptors, in: usage.history)
+        ReportedSpendBreakdowns.append(to: &snapshot, in: usage.history, parts: usage.spendHistories) // PERSONAL BUILD: Total Spend
         return snapshot
     }
 }

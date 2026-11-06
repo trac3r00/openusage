@@ -12,7 +12,7 @@ openusage codex@1a2b3c4d   # one account, by its id
 
 - The argument is an account id (the `providers` key in the output) or a provider kind: `claude`,
   `codex`, `cursor`, `antigravity`, `copilot`, `devin`, `grok`, `muse`, `ollama`, `opencode`,
-  `openrouter`, `zai`. Anything else is an error.
+  `openrouter`, `anthropic-api`, `zai`. Anything else is an error.
 - `--force` from 0.7.x is accepted and does nothing. The command says so on stderr.
 
 ## Install on `PATH`
@@ -105,6 +105,7 @@ account's right-click menu.
 | Ollama | `session`, `weekly`, `monthly`, `purchasedCredits` |
 | OpenCode | `session`, `weekly`, `monthly` |
 | OpenRouter | `balance`, `keyLimit` |
+| Anthropic API (`anthropic-api`) | None: its rows are spend periods |
 | Z.ai | `session`, `weekly`, `webSearches`, `rateLimitResets` |
 
 - ChatGPT `credits` is `0` when the balance is empty, and absent when ChatGPT reports no balance.

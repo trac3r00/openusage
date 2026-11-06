@@ -38,6 +38,7 @@ The app updates itself with signed, notarized [Sparkle](docs/updates.md) updates
 - **[Ollama](docs/providers.md#ollama)**: session, weekly, monthly, extra usage, daily usage and tokens
 - **[OpenCode](docs/providers.md#opencode)**: session, weekly, monthly
 - **[OpenRouter](docs/providers.md#openrouter)**: balance, spend, key limit, budget
+- **[Anthropic API](docs/providers.md#anthropic-api)**: Claude Console organization spend and tokens, daily
 - **[Z.ai](docs/providers.md#zai)**: session, weekly, web searches, rate-limit resets
 - **[CLIProxyAPI hubs](docs/cliproxyapi.md)**: every Claude, ChatGPT, Antigravity, Devin, and Grok login on
   a [CLIProxyAPI](https://github.com/router-for-me/CLIProxyAPI) server
@@ -54,6 +55,10 @@ files, or logs. See [Accounts](docs/accounts.md). Coming from 0.7.x? See
   where an even pace would be.
 - **Your layout.** Pin the metrics you care about, hide the rest, and drag everything into your order.
 - **Rate-limit resets.** See and spend Claude and ChatGPT resets.
+- **Total Spend (personal build).** A ring at the top of the dashboard with combined spend or tokens
+  per provider for Today, Yesterday, or 30 Days. Claude, ChatGPT, Grok, and OpenCode figures are
+  estimated from this Mac's local logs and public price lists, so this build does read those tools'
+  log files. See [Total Spend](docs/dashboard.md#total-spend).
 - **Share.** Copy a picture of your usage to the clipboard.
 - **Notifications.** A heads-up before a limit runs out, or before a weekly limit resets with most of
   it unused.

@@ -156,6 +156,14 @@ extension AccountProviderRuntime {
                 .boundedDollars(key: "budget", provider: provider, title: "Budget", limit: 100),
                 .boundedCount(key: "freeRequests", provider: provider, title: "Free Requests", limit: 50)
             ]
+        case .anthropicAPI:
+            [
+                .history(key: "today", provider: provider, .window(.today, .spend, then: .tokens)),
+                .history(key: "yesterday", provider: provider, .window(.yesterday, .spend, then: .tokens)),
+                .history(key: "week", provider: provider, .window(.thisWeek, .spend)),
+                .history(key: "month", provider: provider, .window(.thisMonth, .spend)),
+                .history(key: "last30", provider: provider, .window(.lastDays(30), .spend, then: .tokens))
+            ]
         case .zai:
             [
                 .percent(key: "session", provider: provider, title: "Session")

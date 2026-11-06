@@ -7,6 +7,43 @@ The panel that opens from the menu bar icon. It has two tabs, Priority and All U
 - With no accounts, both tabs show **Add Account**.
 - Closing the panel returns it to the dashboard, scrolled to the top.
 
+## Total Spend
+
+This is a personal build. A Total Spend card sits at the top of both tabs, above the cards. It's
+hidden when no provider has dollars or tokens for any period, or when Total Spend is off in
+[Settings → Display](settings.md#usage-display).
+
+- The title is a pull-down for **Cost**, **Cost/MTok**, or **Tokens**. Cost is the default, and the
+  choice sticks across restarts.
+- A switcher picks **Today**, **Yesterday**, or **30 Days**. That choice sticks too.
+- The ring has one slice per account, in its provider's brand color; a provider's second and later
+  accounts get lighter shades of it. When a provider has several accounts, each slice is named,
+  like `Cursor · Work`. The legend lists slices biggest first. A slice with nothing for the chosen
+  metric is left out, never shown as zero.
+- The center shows a short number over its unit. Hover it for the exact figure, plus a note when
+  any dollars are local estimates.
+- Hover a slice in the legend to see its top models.
+- Under the ring, **Top Model** names the biggest model across all slices for the period.
+  With Cost/MTok it's the model that cost the most, shown with its rate.
+
+Where the numbers come from:
+
+- **Claude, ChatGPT, Grok, OpenCode.** This Mac's local logs, priced from public price lists, so
+  they're estimates. The logs belong to the Mac, so each provider gets one slice however many
+  accounts it has, named `This Mac` when it has more than one. A provider counts only once you've
+  added an account for it.
+- **Cursor, OpenRouter, Ollama, Anthropic API.** What each account's provider reported, one slice
+  per account. ChatGPT's reported tokens are used only when there are no local logs for the period.
+- When Claude's local logs count a period, an Anthropic API slice leaves out its Claude Code use, so
+  Claude Code billed to the organization is counted once, under Claude.
+- Hover an Anthropic API slice to also see its **Top API Keys**: where the money went, by key name.
+  Claude Code has its own row, and use with no key, such as the Console, shows as `No API Key`.
+- An account's figures count only on the day they were read, so after midnight its slice waits
+  for the next refresh instead of showing yesterday as today.
+
+The logs are read again on each refresh, and only files that changed are parsed again. Opening
+the panel doesn't start a read.
+
 ## Priority
 
 Priority shows only what needs you, most urgent first.
