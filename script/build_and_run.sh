@@ -142,11 +142,17 @@ cat >"$INFO_PLIST" <<PLIST
 PLIST
 
 # Pick a stable Apple Development identity so ad-hoc cdhash churn doesn't re-trigger
-# permission prompts on every rebuild. Fall back to ad-hoc only if none is found.
+# permission prompts on every rebuild. Without one, use the self-signed identity
+# script/setup_local_signing.sh creates, which is just as stable. Fall back to ad-hoc only if neither exists.
 CODESIGN_IDENTITY="${CODESIGN_IDENTITY:-}"
+LOCAL_SIGNING_KEYCHAIN="$HOME/Library/Keychains/openusage-dev-signing.keychain-db"
 if [ -z "$CODESIGN_IDENTITY" ]; then
   CODESIGN_IDENTITY=$(/usr/bin/security find-identity -p codesigning -v 2>/dev/null \
     | /usr/bin/awk -F\" '/Apple Development:/ { print $2; exit }')
+fi
+if [ -z "$CODESIGN_IDENTITY" ] && [ -f "$LOCAL_SIGNING_KEYCHAIN" ]; then
+  /usr/bin/security unlock-keychain -p "" "$LOCAL_SIGNING_KEYCHAIN"
+  CODESIGN_IDENTITY="OpenUsage Local Dev"
 fi
 
 # Embed + sign Sparkle.framework before sealing the app. The executable links Sparkle, so without the
@@ -165,7 +171,7 @@ if [ -n "$CODESIGN_IDENTITY" ]; then
 else
   /usr/bin/codesign --force --sign - "$CLI_BINARY" >/dev/null
   /usr/bin/codesign --force --sign - --entitlements "$SIGN_ENTITLEMENTS" "$APP_BUNDLE" >/dev/null
-  echo "WARNING: no Apple Development identity found; ad-hoc signed." >&2
+  echo "WARNING: no Apple Development identity found; ad-hoc signed. Run script/setup_local_signing.sh." >&2
 fi
 
 launch_app() {
