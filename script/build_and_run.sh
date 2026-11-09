@@ -161,7 +161,12 @@ fi
 "$ROOT_DIR/script/embed_sparkle.sh" "$APP_BUNDLE" "$APP_BINARY" "$CODESIGN_IDENTITY" "--options runtime"
 
 if [ -n "$CODESIGN_IDENTITY" ]; then
-  /usr/bin/codesign --force --options runtime --sign "$CODESIGN_IDENTITY" "$CLI_BINARY" >/dev/null
+  # The helper links Sparkle too, so it needs the same disable-library-validation entitlement as the app
+  # (a self-signed identity has no Team ID); without it dyld kills `openusage` before it prints anything.
+  /usr/bin/codesign --force --options runtime \
+    --sign "$CODESIGN_IDENTITY" \
+    --entitlements "$SIGN_ENTITLEMENTS" \
+    "$CLI_BINARY" >/dev/null
   # Not --deep: the Sparkle framework is already signed above and must keep that signature.
   /usr/bin/codesign --force --options runtime \
     --sign "$CODESIGN_IDENTITY" \
